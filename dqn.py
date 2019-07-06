@@ -31,8 +31,8 @@ class DQN(RLAgent):
         self.cur_step = 0
         self.episode = 0
         self.max_epsilon = 1.0
-        self.min_epsilon = 0.1
-        self.decay_rate = 10000
+        self.min_epsilon = 0.2
+        self.decay_rate = 100000
         self.var_epsilon = True
 
         dqn_net = NeuralNet(self.input_size, self.hidden_size, self.output_size)
