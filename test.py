@@ -10,7 +10,7 @@ def train_dqn(env, args):
     agent.train()
     
     total_episodes = args.episodes
-    max_steps = 10000
+    max_steps = 10
 
     for episode in range(total_episodes):
         print(episode, agent.epsilon, end='\r')
@@ -29,6 +29,9 @@ def train_dqn(env, args):
 
             if done:
                 break
+        
+        if episode % 5 == 0:
+            max_steps += 10
 
     return agent
 
