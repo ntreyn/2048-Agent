@@ -38,6 +38,7 @@ class env_2048(gym.Env):
         self.reward = 0
         self.spawn_tile(num=2)
         self.done = False
+        return self.get_state()
 
 
     def step(self, action):
