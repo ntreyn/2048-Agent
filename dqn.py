@@ -22,17 +22,17 @@ class DQN(RLAgent):
             self.device = torch.device('cpu')
 
         self.input_size = self.env.size
-        self.hidden_size = 16
+        self.hidden_size = 128
         self.output_size = self.env.action_space.n
 
         self.memory_size = 2560
-        self.batch_size = 16
+        self.batch_size = 128
         self.clip = 10
         self.cur_step = 0
         self.episode = 0
         self.max_epsilon = 1.0
         self.min_epsilon = 0.1
-        self.decay_rate = 1000
+        self.decay_rate = 10000
         self.var_epsilon = True
 
         dqn_net = NeuralNet(self.input_size, self.hidden_size, self.output_size)
