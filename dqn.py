@@ -61,12 +61,15 @@ class DQN(RLAgent):
                 policy_out = self.policy_net(state.to(self.device))
             self.policy_net.train()
 
-            open_actions = self.env.possible_actions()
-            open_policy = np.array([-float('Inf')] * self.env.action_space.n)
-            open_policy[open_actions] = np.array(policy_out.flatten().tolist())[open_actions]
-            max_actions = np.argwhere(open_policy == np.max(open_policy)).flatten()
-            action = np.random.choice(max_actions)
-            # action = policy_out.max(1)[1].view(1, 1).item()
+            open_mask = torch.tensor([self.env.possible_actions()], dtype=torch.long, device=self.device)
+            open_vals = torch.tensor([[-100] * self.env.action_space.n], dtype=torch.float, device=self.device)
+            open_vals[0][open_mask] = policy_out[0][open_mask]
+            action = open_vals.max(1)[1].view(1, 1).item()
+
+            # action = policy_out[0][open_mask].max(1)[1].view(1, 1).item()
+
+            if action not in self.env.possible_actions():
+                import pdb; pdb.set_trace()
 
         return action
     

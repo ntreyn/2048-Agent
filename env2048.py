@@ -135,6 +135,9 @@ class env_2048(gym.Env):
 
         return actions
 
+    def max_tile(self):
+        return 2 ** max(self.board)
+
     def push_up(self):
         for c in range(self.dim):
             column = self.get_col(c)
