@@ -62,7 +62,7 @@ class DQN(RLAgent):
             self.policy_net.train()
 
             open_mask = torch.tensor([self.env.possible_actions()], dtype=torch.long, device=self.device)
-            open_vals = torch.tensor([[-100] * self.env.action_space.n], dtype=torch.float, device=self.device)
+            open_vals = torch.tensor([[-float('Inf')] * self.env.action_space.n], dtype=torch.float, device=self.device)
             open_vals[0][open_mask] = policy_out[0][open_mask]
             action = open_vals.max(1)[1].view(1, 1).item()
 
