@@ -22,11 +22,11 @@ class DQN(RLAgent):
             self.device = torch.device('cpu')
 
         self.input_size = self.env.size
-        self.hidden_size = 128
+        self.hidden_size = 16
         self.output_size = self.env.action_space.n
 
         self.memory_size = 2560
-        self.batch_size = 128
+        self.batch_size = 16
         self.clip = 10
         self.cur_step = 0
         self.episode = 0
